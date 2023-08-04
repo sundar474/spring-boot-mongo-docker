@@ -56,5 +56,13 @@ pipeline {
                 }
             }
         }
-  
         
+        stage('Deploy Application In Kubernetes Cluster') {
+            steps {
+                withKubeConfig(credentialsId: KUBE_CONFIG_CRED_ID) {
+                    sh "kubectl apply -f springBootMongo.yml"
+                }
+            }
+        }
+    }
+}
