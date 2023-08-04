@@ -61,7 +61,7 @@ pipeline {
             steps {
                 withKubeConfig(credentialsId: KUBE_CONFIG_CRED_ID) {
                     // Correct the path to the Kubernetes YAML file
-                    sh "kubectl apply -f springBootMongo.yml"
+                    sh "kubectl apply -f Jenkinsfile/springBootMongo.yml"
                 }
             }
         }
