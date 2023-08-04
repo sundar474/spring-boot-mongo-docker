@@ -48,9 +48,11 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 withCredentials([string(credentialsId: DOCKER_CRED_ID, variable: 'Hub_Docker_Cred')]) {
-                    sh "docker login -u saint473 -p ${Hub_Docker_Cred} ${DOCKER_REGISTRY}"
-                }
-                sh 'docker push saint473/spring-boot-mongo'
+            script {
+                sh """
+                docker login -u saint473 -p '$Hub_Docker_Cred' ${DOCKER_REGISTRY}
+                docker push saint473/spring-boot-mongo
+                """
             }
         }
         
