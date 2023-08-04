@@ -9,7 +9,6 @@ pipeline {
         DOCKER_REGISTRY = 'https://index.docker.io/v1/'
         DOCKER_CRED_ID = 'Hub_Docker_Cred'
         KUBE_CONFIG_CRED_ID = 'KubeConfigFile'
-        KUBE_NAMESPACE = 'production'
     }
 
     stages {
@@ -61,7 +60,7 @@ pipeline {
         stage('Deploy Application In Kubernetes Cluster') {
             steps {
                 withKubeConfig(credentialsId: KUBE_CONFIG_CRED_ID) {
-                    sh "kubectl apply -f springBootMongo.yml -n ${KUBE_NAMESPACE}"
+                    sh "kubectl apply -f springBootMongo.yml"
                 }
             }
         }
