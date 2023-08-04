@@ -6,7 +6,7 @@ pipeline {
         MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
         NEXUS_URL = 'http://3.142.194.99:8081/'
         SONARQUBE_URL = 'http://3.145.92.245:9000/'
-        DOCKER_REGISTRY = 'https://hub.docker.com/'
+        DOCKER_REGISTRY = 'https://index.docker.io/v1/'
         DOCKER_CRED_ID = 'Hub_Docker_Cred'
         KUBE_CONFIG_CRED_ID = 'KubeConfigFile'
         KUBE_NAMESPACE = 'production'
@@ -50,7 +50,7 @@ pipeline {
                 withCredentials([string(credentialsId: DOCKER_CRED_ID, variable: 'Hub_Docker_Cred')]) {
                     script {
                         sh """
-                        docker login -u saint473 -p '$Hub_Docker_Cred' ${DOCKER_REGISTRY}
+                        echo \$Hub_Docker_Cred | docker login -u saint473 --password-stdin ${DOCKER_REGISTRY}
                         docker push saint473/spring-boot-mongo
                         """
                     }
