@@ -3,7 +3,6 @@ pipeline {
 
 	environment {
 		GIT_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
-		MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
 	}
 
 	stages {
@@ -14,8 +13,12 @@ pipeline {
 	}
 
 	stage('Build') {
-		def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
-		sh "${mavenCmd} clean package"
+		steps {
+			script {
+				def mavenCMD = "${env.MAVEN_HOME}/bin/mvn"
+				sh "${mavenCMD} clean package"
+				}
+			}
 		}
 	}
 }
