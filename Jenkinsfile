@@ -15,8 +15,8 @@ pipeline {
 	stage('Build') {
 		steps {
 			script {
-				def mavenCMD = "${env.MAVEN_HOME}/bin/mvn"
-				sh "${mavenCMD} clean package"
+				def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
+				sh "${mavenCmd} clean package"
 				}
 			}
 		}
