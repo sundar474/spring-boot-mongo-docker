@@ -10,12 +10,12 @@ pipeline {
 		stage('Checkout') {
 			steps {
 				git branch: 'master', url: GIT_REPO
-			}
 		}
+	}
 
-		stage('Build') {
-			def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
-			sh "${mavenCmd} clean package"
+	stage('Build') {
+		def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
+		sh "${mavenCmd} clean package"
 		}
 	}
 }
