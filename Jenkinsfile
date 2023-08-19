@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         GIT_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
+        MAVEN_PATH = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
     }
 
     stages {
