@@ -8,7 +8,16 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master', url: GIT_REPO
+                git branch: 'master', url GIT_REPO
+            }
+        }
+
+        stage('Build') {
+            steps{
+                script {
+                    def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
+                    sh "${mavenCmd} clean package"
+                }
             }
         }
     }
