@@ -1,46 +1,26 @@
 pipeline {
-    agent any
-    
-    environment {
-        GIT_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
-        MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
-        DOCKER_REGISTRY = "https://hub.docker.com/u/saint473"
-    }
+	agent any
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'master', url: GIT_REPO
-            }
-        }
-        
-        stage('Build') {
-            steps {
-                script {
-                    def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
-                    sh "${mavenCmd} clean package"
-                }
-            }
-        }
+	environment {
+		Git_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
+		MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
+	}
 
-		stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('Sonar Server-7.8') {
-                    script {
-                        def mavenCmd = "${env.MAVEN_HOME}/bin/mvn"
-                        sh "${mavenCmd} sonar:sonar"
-					}
-				}
+	stages {
+		stage('Checkout') {
+			steps {
+				git branch: 'master', url: GIT_REPO
 			}
 		}
 
-		stage('Build Image') {
-			steps {
-				sh "docker build -t saint473/spring-boot-mongo ."
+	}
+
+	stage('Build') {
+		steps {
+			script {
+				def mavCmd = "${env.MAVEN_HOME}/bin/mvn"
+				sh "${mavenCmd} clean package"
 			}
 		}
 	}
 }
-					
-						
-			
