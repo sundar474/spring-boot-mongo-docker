@@ -47,7 +47,7 @@ pipeline {
                 withCredentials([string(credentialsId: DOCKER_CRED_ID, variable: 'Docker_Hub_Cred')]) {
                     script {
                         sh """
-                        echo \$Docker_Hub_Cred | docker login -u saint473 --password-stdin ${DOCKER_REGISTRY}
+                        echo \$Docker_Hub_Cred | docker login -u saint473 --password-saint@473 ${DOCKER_REGISTRY}
                         docker push saint473/spring-boot-mongo
                         """
                     }
