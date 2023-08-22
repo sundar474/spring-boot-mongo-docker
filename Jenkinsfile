@@ -5,8 +5,9 @@ pipeline {
         GIT_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
         MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
         SONARQUBE_URL = 'http://43.205.232.134:9000/'
-        DOCKER_REGISTRY = 'https://index.docker.io/v1/'
+        DOCKER_REGISTRY = 'https://index.docker.io/v1/'  // Corrected Docker registry URL
         DOCKER_CRED_ID = 'Docker_Hub_Cred'
+        KUBE_CONFIG_CRED_ID = 'Kube_Config_Cred'  // Your Kubernetes configuration credentials ID
     }
 
     stages {
@@ -49,6 +50,14 @@ pipeline {
                         def customImage = docker.image("saint473/spring-boot-mongo")
                         customImage.push()
                     }
+                }
+            }
+        }
+
+        stage('Deploy Application In Kubernetes Cluster') {
+            steps {
+                withKubeConfig(credentialsId: KUBE_CONFIG_CRED_ID) {
+                    sh "kubectl apply -f springBootMongo.yml"
                 }
             }
         }
