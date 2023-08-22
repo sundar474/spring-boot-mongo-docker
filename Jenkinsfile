@@ -6,7 +6,7 @@ pipeline {
         MAVEN_HOME = '/var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/Maven-3.8.6'
         SONARQUBE_URL = 'http://43.205.232.134:9000/'
         DOCKER_REGISTRY = 'https://hub.docker.com/u/saint473'
-        DOCKER_CRED_ID = 'Docker_Hub_Credentials'
+        DOCKER_CRED_ID = 'Docker_Hub_credentioals'
     }
 
     stages {
@@ -44,10 +44,10 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                withCredentials([string(credentialsId: DOCKER_CRED_ID, variable: 'Docker_Hub_Credentials')]) {
+                withCredentials([string(credentialsId: DOCKER_CRED_ID, variable: 'Docker_Hub_credentioals')]) {
                     script {
                         sh """
-                        echo \$Docker_Hub_Credentials | docker login -u saint473 --password-stdin ${DOCKER_REGISTRY}
+                        echo \$Docker_Hub_credentioals | docker login -u saint473 --password-stdin ${DOCKER_REGISTRY}
                         docker push saint473/spring-boot-mongo
                         """
                     }
