@@ -4,7 +4,7 @@ pipeline {
     environment {
         GIT_REPO = 'https://github.com/sundar474/spring-boot-mongo-docker.git'
         MAVEN_HOME = '/usr/share/maven'
-        SONARQUBE_URL = 'http://13.59.167.162/:9000/'
+        SONARQUBE_URL = 'http://43.205.232.134:9000/'
         DOCKER_REGISTRY = 'https://index.docker.io/v1/'  // Corrected Docker registry URL
         DOCKER_CRED_ID = 'Docker_Hub_Cred'
         KUBE_CONFIG_CRED_ID = 'Kube_Config_Cred'  // Your Kubernetes configuration credentials ID
